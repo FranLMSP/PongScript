@@ -64,10 +64,25 @@ class Player
 		}
 	}
 
+	limits()
+	{
+		if (this.y<=20)
+		{
+			this.speed = 0;
+			this.y = 20;
+		}
+		if(this.y+this.h>=(480-20))
+		{
+			this.speed = 0;
+			this.y = (480-20)-this.h;
+		}
+	}
+
 	update()
 	{
 		this.move();
 		this.speedDown();
+		this.limits();
 	}
 
 
