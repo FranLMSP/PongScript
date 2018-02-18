@@ -22,4 +22,9 @@ class Graphics
 		this.layout.fillRect(x,y,w,h);
 	}
 
+	drawPlayer(player)
+	{
+		this.drawRect(player.x,player.y,player.w,player.h,'#FFFFFF');
+	}
+
 }
