@@ -76,7 +76,8 @@ class Game
 		this.graphics.drawBackground();
 		this.graphics.drawLines();
 
-		this.graphics.drawNumber(100,100,9);
+		this.graphics.drawNumber(130,60,this.player1.points);
+		this.graphics.drawNumber(450,60,this.player2.points);
 
 		this.graphics.drawBall(this.ball);
 		this.graphics.drawPlayer(this.player1);
