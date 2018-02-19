@@ -76,7 +76,7 @@ class Game
 		this.graphics.drawBackground();
 		this.graphics.drawLines();
 
-		this.graphics.drawNumber(100,100,4);
+		this.graphics.drawNumber(100,100,5);
 
 		this.graphics.drawBall(this.ball);
 		this.graphics.drawPlayer(this.player1);
