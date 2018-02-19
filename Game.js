@@ -10,6 +10,8 @@ class Game
 		this.inputs = new Input('keydown');
 		this.player1 = new Player(20,20);
 		this.player2 = new Player(640-20-20,20);
+
+		this.ball = new Ball();
 		this.setActions();
 
 		// setInterval(this.update.bind(this),100);
@@ -44,7 +46,9 @@ class Game
 	draw()
 	{
 		this.graphics.drawBackground();
+		// this.graphics.drawBall(this.ball);
 		this.graphics.drawPlayer(this.player1);
 		this.graphics.drawPlayer(this.player2);
+
 	}
 }

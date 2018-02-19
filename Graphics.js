@@ -22,9 +22,21 @@ class Graphics
 		this.layout.fillRect(x,y,w,h);
 	}
 
+	drawCircle(x,y,r,color,start=0,end=2*Math.PI)
+	{
+		this.layout.fillStyle = color;
+		this.layout.arc(x, y, r, start, end);
+		this.layout.fill();
+	}
+
 	drawPlayer(player)
 	{
 		this.drawRect(player.x,player.y,player.w,player.h,'#FFFFFF');
+	}
+
+	drawBall(ball)
+	{
+		this.drawCircle(ball.x,ball.y,ball.r,'#FFFFFF');
 	}
 
 }
