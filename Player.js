@@ -7,6 +7,8 @@ class Player
 		this.w = w;
 		this.h = h;
 
+		this.points = 0;
+
 		this.speed = 0;
 		this.acceleration = acceleration;
 		this.maxSpeed = max_speed;
