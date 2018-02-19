@@ -14,6 +14,10 @@ class Game
 		this.ball = new Ball();
 		this.setActions();
 
+
+
+		//TEMP
+		this.angle = 0;
 		// setInterval(this.update.bind(this),100);
 		setTimeout(this.update.bind(this),0);
 	}
@@ -26,6 +30,8 @@ class Game
 	{
 		this.timer.frameStart();
 
+
+		// console.log(this.angle);
 
 
 		this.inputs.beginFrame();
@@ -43,9 +49,12 @@ class Game
 
 		this.player1.update();
 		this.player2.update();
+
+		this.ball.update(this.player1);
+		this.ball.update(this.player2);
+
+
 		this.draw();
-
-
 
 		this.timer.frameEnd(this.update.bind(this));
 	}
@@ -53,7 +62,7 @@ class Game
 	draw()
 	{
 		this.graphics.drawBackground();
-		// this.graphics.drawBall(this.ball);
+		this.graphics.drawBall(this.ball);
 		this.graphics.drawPlayer(this.player1);
 		this.graphics.drawPlayer(this.player2);
 
