@@ -43,8 +43,8 @@ class Player
 		else
 		{
 			this.speed -= this.acceleration;
-			if(this.speed<this.maxSpeed*-1)
-				this.speed = this.maxSpeed*-1;
+			if(this.speed<-this.maxSpeed)
+				this.speed = -this.maxSpeed;
 		}
 	}
 

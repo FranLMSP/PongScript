@@ -39,12 +39,13 @@ class Timer
 		// this.lag+=3;
 		if(difference < this.fps)
 		{		
-			console.log('Difference: '+difference+'. Delayed: '+(this.fps-difference)+'. TOTAL: '+(difference+(this.fps-difference)));
+			// console.log('Difference: '+difference+'. Delayed: '+(this.fps-difference)+'. TOTAL: '+(difference+(this.fps-difference)));
 			setTimeout(update,(this.fps-difference));
 		}
 		else
 		{
-			setTimeout(update,1);
+			console.log('WARNING');
+			update();
 
 			// setTimeout(update,this.lag);
 		}

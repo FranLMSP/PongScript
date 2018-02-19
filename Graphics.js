@@ -12,6 +12,7 @@ class Graphics
 
 	drawBackground()
 	{
+		// this.layout.clearRect(true);
 		this.layout.fillStyle = this.backgroundColor;
 		this.layout.fillRect(0,0,this.canvas.width,this.canvas.height);
 	}
@@ -25,6 +26,7 @@ class Graphics
 	drawCircle(x,y,r,color,start=0,end=2*Math.PI)
 	{
 		this.layout.fillStyle = color;
+		this.layout.beginPath();
 		this.layout.arc(x, y, r, start, end);
 		this.layout.fill();
 	}
@@ -34,9 +36,10 @@ class Graphics
 		this.drawRect(player.x,player.y,player.w,player.h,'#FFFFFF');
 	}
 
-	drawBall(ball)
+	drawBall(ball,color = '#FFFFFF')
 	{
-		this.drawCircle(ball.x,ball.y,ball.r,'#FFFFFF');
+		this.drawCircle(ball.x,ball.y,ball.r,color);
+		// this.drawCircle(ball.x,ball.y,ball.r,'#FF0000');
 	}
 
 }
