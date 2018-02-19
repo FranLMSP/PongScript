@@ -4,7 +4,7 @@ class Game
 	constructor()
 	{
 		this.graphics = new Graphics(640,480,'#263238');
-
+		this.timer = new Timer();
 
 		
 		this.inputs = new Input('keydown');
@@ -15,7 +15,7 @@ class Game
 		this.setActions();
 
 		// setInterval(this.update.bind(this),100);
-		setInterval(this.update.bind(this),1000/60);
+		setTimeout(this.update.bind(this),0);
 	}
 
 	setActions()
@@ -24,6 +24,10 @@ class Game
 
 	update()
 	{
+		this.timer.frameStart();
+
+
+
 		this.inputs.beginFrame();
 
 		if(this.inputs.heldKey('player1Up'))
@@ -41,6 +45,9 @@ class Game
 		this.player2.update();
 		this.draw();
 
+
+
+		this.timer.frameEnd(this.update.bind(this));
 	}
 
 	draw()
