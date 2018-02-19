@@ -16,7 +16,7 @@ class Ball
 	{
 		// this.x++;
 		// console.log(this.x);
-
+		// player.x++;
 		for(let angle = 0; angle <= 360; angle+=0.5)
 		{
 			let x = (this.r * Math.cos(angle)) + this.x;
@@ -94,7 +94,7 @@ class Ball
 		if((this.y+this.r)>480)
 			this.y = 480 - this.r;
 
-		this.border();
+		return this.border();
 	}
 
 
@@ -102,8 +102,14 @@ class Ball
 	{
 		if(this.y-this.r <= 0)
 			this.vspeed=-this.vspeed;
-
-		if(this.y+this.r >= 480)
+		else if(this.y+this.r >= 480)
 			this.vspeed=-this.vspeed;
+		
+		if(this.x+this.r < 0)
+			return 2;
+		else if(this.x-this.r > 640)
+			return 1;
+		else
+			return 0;
 	}
 }

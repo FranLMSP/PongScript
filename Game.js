@@ -51,8 +51,20 @@ class Game
 		this.player2.update();
 
 		this.ball.update(this.player1);
-		this.ball.update(this.player2);
+		let point = this.ball.update(this.player2);
 
+		if(point == 1)
+		{
+			this.player1.points++;
+			console.log('Player 1 points: '+ this.player1.points);
+			this.ball = new Ball()
+		}
+		else if(point == 2)
+		{
+			this.player2.points++;
+			console.log('Player 2 points: '+ this.player2.points);
+			this.ball = new Ball()
+		}
 
 		this.draw();
 
@@ -62,6 +74,10 @@ class Game
 	draw()
 	{
 		this.graphics.drawBackground();
+		this.graphics.drawLines();
+
+		this.graphics.drawNumber(100,100,1);
+
 		this.graphics.drawBall(this.ball);
 		this.graphics.drawPlayer(this.player1);
 		this.graphics.drawPlayer(this.player2);
