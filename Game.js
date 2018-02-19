@@ -58,12 +58,24 @@ class Game
 			this.player1.points++;
 			console.log('Player 1 points: '+ this.player1.points);
 			this.ball = new Ball()
+			if(this.player1.points>9)
+			{
+				alert('PLAYER 1 WINS!');
+				this.player1.points=0;
+				this.player2.points=0;
+			}
 		}
 		else if(point == 2)
 		{
 			this.player2.points++;
 			console.log('Player 2 points: '+ this.player2.points);
 			this.ball = new Ball()
+			if(this.player2.points>9)
+			{
+				alert('PLAYER 2 WINS!');
+				this.player1.points=0;
+				this.player2.points=0;
+			}
 		}
 
 		this.draw();
