@@ -181,6 +181,38 @@ class Graphics
 
 				break;
 			case 4:
+				this.drawRect(x    , y, 10, 10,'#bdbdbd');
+				this.drawRect(x+10 , y, 10, 10,'#bdbdbd');
+				this.drawRect(x+40 , y, 10, 10,'#bdbdbd');
+				this.drawRect(x+50 , y, 10, 10,'#bdbdbd');
+
+				this.drawRect(x    , y+10, 10, 10,'#bdbdbd');
+				this.drawRect(x+10 , y+10, 10, 10,'#bdbdbd');
+				this.drawRect(x+40 , y+10, 10, 10,'#bdbdbd');
+				this.drawRect(x+50 , y+10, 10, 10,'#bdbdbd');
+
+				this.drawRect(x    , y+20, 10, 10,'#bdbdbd');
+				this.drawRect(x+10 , y+20, 10, 10,'#bdbdbd');
+				this.drawRect(x+40 , y+20, 10, 10,'#bdbdbd');
+				this.drawRect(x+50 , y+20, 10, 10,'#bdbdbd');
+
+				this.drawRect(x    , y+30, 10, 10,'#bdbdbd');
+				this.drawRect(x+10 , y+30, 10, 10,'#bdbdbd');
+				this.drawRect(x+40 , y+30, 10, 10,'#bdbdbd');
+				this.drawRect(x+50 , y+30, 10, 10,'#bdbdbd');
+
+				this.drawRect(x+10 , y+40, 10, 10,'#bdbdbd');
+				this.drawRect(x+20 , y+40, 10, 10,'#bdbdbd');
+				this.drawRect(x+30 , y+40, 10, 10,'#bdbdbd');
+				this.drawRect(x+40 , y+40, 10, 10,'#bdbdbd');
+				this.drawRect(x+50 , y+40, 10, 10,'#bdbdbd');
+
+				this.drawRect(x+40 , y+50, 10, 10,'#bdbdbd');
+				this.drawRect(x+50 , y+50, 10, 10,'#bdbdbd');
+
+				this.drawRect(x+40 , y+60, 10, 10,'#bdbdbd');
+				this.drawRect(x+50 , y+60, 10, 10,'#bdbdbd');
+
 				break;
 			case 5:
 				break;
