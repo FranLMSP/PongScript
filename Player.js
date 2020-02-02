@@ -1,5 +1,4 @@
-class Player
-{
+class Player {
 	constructor(x, y, w = 20, h = 20 * 5, acceleration = 0.2, friction = 0.1, max_speed = 5) {
 		this.x = x
 		this.y = y
@@ -31,7 +30,7 @@ class Player
 	}
 
 	speedUp(minus) {
-		if(minus>0) {
+		if(minus > 0) {
 			this.speed += this.acceleration
 			if(this.speed > this.maxSpeed)
 				this.speed = this.maxSpeed

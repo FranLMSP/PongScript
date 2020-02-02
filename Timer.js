@@ -1,5 +1,4 @@
-class Timer
-{
+class Timer {
 	constructor() {
 		this.start = null
 		this.fps = 1000/60

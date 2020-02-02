@@ -1,15 +1,12 @@
-class Input
-{
-	constructor()
-	{
+class Input {
+	constructor() {
 		document.addEventListener('keydown', this.pressedKey.bind(this))
 		document.addEventListener('keyup', this.releasedKey.bind(this))
 		this.pressedKeys = []
 	}
 
 
-	pressedKey(event)
-	{
+	pressedKey(event) {
 		switch(event.keyCode) {
 			case 8: //backspace
 				this.pressedKeys.player2Back = true
@@ -53,8 +50,7 @@ class Input
 		}
 	}
 
-	releasedKey(event)
-	{
+	releasedKey(event) {
 		switch(event.keyCode) {
 			case 8: //backspace
 				this.pressedKeys.player2Back = false
@@ -99,56 +95,43 @@ class Input
 
 	}
 
-	heldKey(key)
-	{
+	heldKey(key) {
 		return this.pressedKeys[key]
 	}
 
-	action()
-	{
+	action() {
 		alert('AAA!')
 	}
 
-	keyUp(cb)
-	{
+	keyUp(cb) {
 		cb()
 	}
 
-	keyDown(cb)
-	{
-		cb()
-
-	}
-
-	keyLeft(cb)
-	{
-		cb()
-
-	}
-
-	keyRight(cb)
-	{
-		cb()
-
-	}
-
-	keyAction(cb)
-	{
+	keyDown(cb) {
 		cb()
 	}
 
-	keyBack(cb)
-	{
+	keyLeft(cb) {
 		cb()
 	}
 
-	beginFrame()
-	{
+	keyRight(cb) {
+		cb()
+	}
+
+	keyAction(cb) {
+		cb()
+	}
+
+	keyBack(cb) {
+		cb()
+	}
+
+	beginFrame() {
 		// this.pressedKeys = []
 	}
 
-	endFrame()
-	{
+	endFrame() {
 		this.pressed = true
 	}
 }

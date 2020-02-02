@@ -1,8 +1,5 @@
-
-class Game
-{
-	constructor()
-	{
+class Game {
+	constructor() {
 		this.graphics = new Graphics(640, 480, '#263238')
 		this.timer = new Timer()
 
@@ -14,20 +11,16 @@ class Game
 		this.ball = new Ball()
 		this.setActions()
 
-
-
 		//TEMP
 		this.angle = 0
 		// setInterval(this.update.bind(this),100)
 		setTimeout(this.update.bind(this), 0)
 	}
 
-	setActions()
-	{
+	setActions() {
 	}
 
-	update()
-	{
+	update() {
 		this.timer.frameStart()
 
 
@@ -55,7 +48,8 @@ class Game
 			console.log('Player 1 points: '+ this.player1.points);
 
 			this.ball = new Ball()
-			if(this.player1.points>9) {
+
+			if(this.player1.points > 9) {
 				alert('PLAYER 1 WINS!')
 				this.player1.points = 0
 				this.player2.points = 0
@@ -66,7 +60,7 @@ class Game
 			console.log('Player 2 points: '+ this.player2.points)
 			this.ball = new Ball()
 
-			if(this.player2.points>9) {
+			if(this.player2.points > 9) {
 				alert('PLAYER 2 WINS!')
 				this.player1.points = 0
 				this.player2.points = 0
@@ -78,8 +72,7 @@ class Game
 		this.timer.frameEnd(this.update.bind(this))
 	}
 
-	draw()
-	{
+	draw() {
 		this.graphics.drawBackground()
 		this.graphics.drawLines()
 
