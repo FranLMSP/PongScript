@@ -13,61 +13,80 @@ class Ball {
 
 	update(player) {
 		for(let angle = 0; angle <= 360; angle += 0.5) {
-			let x = (this.r * Math.cos(angle)) + this.x
-			let y = (this.r * Math.sin(angle)) + this.y
+			// let x = (this.r * Math.sin(angle * (180 / Math.PI) )) + this.x
+			// let y = (this.r * Math.cos(angle * (180 / Math.PI) )) + this.y
+			let x = (Math.cos(angle * Math.PI / 180) * this.r + this.x);
+		    let y = (Math.sin(angle * Math.PI / 180) * this.r + this.y);
 
 			if( (x >= player.x && x <= (player.x + player.w) ) &&// horizontal collision
 				(y >= player.y && y <= (player.y + player.h) ) // vertical collision
 			 ) {
 				let diagonalCol = false
+
 				//RIGTH COLLISION
-				if(angle >= 157 && angle <= 202)
-					this.hspeed = -this.hspeed
+				if((angle >= 0 && angle <= 22.5) || (angle >= 337.5 && angle <= 360)){
+					this.hspeed = this.hspeed >= 0 ? -this.hspeed : this.hspeed
+					this.fixCollisions('right', x, y, player)
+				}
 
 				//LEFT COLLISION
-				if((angle >= 337 && angle <= 360) || (angle >= 0 && angle <= 225))
-					this.hspeed = -this.hspeed
+				if(angle >= 157.5 && angle <= 202.5) {
+					this.hspeed = this.hspeed < 0 ? -this.hspeed : this.hspeed
+					this.fixCollisions('left', x, y, player)
+				}
 
-				//UP COLLISION
-				if(angle >= 247 && angle <= 292)
-					this.vspeed = -this.vspeed
+				//TOP COLLISION
+				if(angle >= 247.5 && angle <= 292.5) {
+					this.vspeed = this.vspeed < 0 ? -this.vspeed : this.vspeed
+					this.fixCollisions('top', x, y, player)
+				}
 
-				//DOWN COLLISION
-				if(angle <= 112 && angle >= 67)
-					this.vspeed = -this.vspeed
+				//BOTTOM COLLISION
+				if(angle >= 67.5 && angle <= 112.5) {
+					this.vspeed = this.vspeed >= 0 ? -this.vspeed : this.vspeed
+					this.fixCollisions('bottom', x, y, player)
+				}
 
 
 				//DIAGONAL COLLISIONS
 
-				//UP LEFT COLLISION
-				if(angle >= 202 && angle <= 247) {
-					this.vspeed = (this.vspeed < 0) ? -this.vspeed : this.vspeed
-					this.hspeed = (this.hspeed < 0) ? -this.hspeed : this.hspeed
+				//TOP LEFT COLLISION
+				if(angle > 202.5 && angle < 247.5) {
+					this.vspeed = this.vspeed < 0 ? -this.vspeed : this.vspeed
+					this.hspeed = this.hspeed < 0 ? -this.hspeed : this.hspeed
 					diagonalCol = true
+					this.fixCollisions('left', x, y, player)
+					this.fixCollisions('top', x, y, player)
 				}
 
-				//UP RIGHT COLLISION
-				if(angle >= 292 && angle <= 337) {
-					this.vspeed = (this.vspeed < 0) ? -this.vspeed : this.vspeed
-					this.hspeed = (this.hspeed > 0) ? -this.hspeed : this.hspeed
+				//TOP RIGHT COLLISION
+				if(angle > 292.5 && angle < 337.5) {
+					this.vspeed = this.vspeed < 0 ? -this.vspeed : this.vspeed
+					this.hspeed = this.hspeed >= 0 ? -this.hspeed : this.hspeed
 					diagonalCol = true
+					this.fixCollisions('right', x, y, player)
+					this.fixCollisions('top', x, y, player)
 				}
 
-				//DOWN RIGHT COLLISION
-				if(angle >= 22 && angle <= 67) {
-					this.vspeed = (this.vspeed > 0) ? -this.vspeed : this.vspeed
-					this.hspeed = (this.hspeed > 0) ? -this.hspeed : this.hspeed
+				//BOTTOM RIGHT COLLISION
+				if(angle > 22.5 && angle < 67.5) {
+					this.vspeed = this.vspeed >= 0 ? -this.vspeed : this.vspeed
+					this.hspeed = this.hspeed >= 0 ? -this.hspeed : this.hspeed
 					diagonalCol = true
+					this.fixCollisions('right', x, y, player)
+					this.fixCollisions('bottom', x, y, player)
 				}
 
-				//DOWN LEFT COLLISION
-				if(angle >= 112 && angle <= 157) {
-					this.vspeed = (this.vspeed > 0) ? -this.vspeed : this.vspeed
-					this.hspeed = (this.hspeed < 0) ? -this.hspeed : this.hspeed
+				//BOTTOM LEFT COLLISION
+				if(angle > 112.5 && angle < 157.5) {
+					this.vspeed = this.vspeed >= 0 ? -this.vspeed : this.vspeed
+					this.hspeed = this.hspeed < 0 ? -this.hspeed : this.hspeed
 					diagonalCol = true
+					this.fixCollisions('left', x, y, player)
+					this.fixCollisions('bottom', x, y, player)
 				}
 
-				if(player.speed !=0 && !diagonalCol)
+				if(player.speed != 0 )
 					this.vspeed = player.speed / 2
 
 				break
@@ -84,6 +103,36 @@ class Ball {
 			this.y = 480 - this.r
 
 		return this.border()
+	}
+
+	fixCollisions(type = null, x, y, player) {
+		if(type == 'top') {
+			const playerBottom = player.y + player.h
+			const offset = playerBottom - y
+
+			if(offset > 0) {
+				this.y += offset
+			}
+		} else if(type == 'bottom') {
+			const offset = y - player.y
+
+			if(offset > 0) {
+				this.y -= offset
+			}
+		} else if(type == 'left') {
+			const playerRight = player.x + player.w
+			const offset = playerRight - x
+
+			if(offset > 0) {
+				this.x += offset
+			}
+		} else if(type == 'right') {
+			const offset = x - player.x
+
+			if(offset > 0) {
+				this.x -= offset
+			}
+		}
 	}
 
 	border() {
