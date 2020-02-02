@@ -1,6 +1,6 @@
 class Ball {
 
-	constructor(r = 40, x = (640 / 2), y = (480 / 2), min_speed = 1, max_speed = 10, friction = 0.3, aceleration = 1) {
+	constructor(r = 40, x = (640 / 2), y = (480 / 2), min_speed = 1, max_speed = 10, friction = 0.3, aceleration = 0.1) {
 		this.r = r
 		this.x = x
 		this.y = y
@@ -12,7 +12,7 @@ class Ball {
 	}
 
 	update(player) {
-		for(let angle = 0; angle <= 360; angle += 0.5) {
+		for(let angle = 0; angle <= 360; angle += 0.25) {
 			// let x = (this.r * Math.sin(angle * (180 / Math.PI) )) + this.x
 			// let y = (this.r * Math.cos(angle * (180 / Math.PI) )) + this.y
 			let x = (Math.cos(angle * Math.PI / 180) * this.r + this.x);
@@ -21,6 +21,8 @@ class Ball {
 			if( (x >= player.x && x <= (player.x + player.w) ) &&// horizontal collision
 				(y >= player.y && y <= (player.y + player.h) ) // vertical collision
 			 ) {
+				this.hspeed = this.hspeed >= 0 ? this.hspeed + this.aceleration : this.hspeed - this.aceleration;
+
 				let diagonalCol = false
 
 				//RIGTH COLLISION
