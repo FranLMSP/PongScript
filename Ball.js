@@ -86,6 +86,36 @@ class Ball {
 		return this.border()
 	}
 
+	fixCollisions(type = null, x, y, player) {
+		if(type == 'top') {
+			const playerBottom = player.y + player.h
+			const offset = playerBottom - y
+
+			if(offset > 0) {
+				this.y += offset
+			}
+		} else if(type == 'bottom') {
+			const offset = y - player.y
+
+			if(offset > 0) {
+				this.y -= offset
+			}
+		} else if(type == 'left') {
+			const playerRight = player.x + player.w
+			const offset = playerRight - x
+
+			if(offset > 0) {
+				this.x += offset
+			}
+		} else if(type == 'right') {
+			const offset = x - player.x
+
+			if(offset > 0) {
+				this.x -= offset
+			}
+		}
+	}
+
 	border() {
 		if(this.y - this.r <= 0)
 			this.vspeed = -this.vspeed
