@@ -1,12 +1,23 @@
 class Game {
 	constructor() {
-		this.graphics = new Graphics(640, 480, '#263238')
+
+		const resolution = {
+			width: 640,
+			height: 480
+		}
+
+		this.graphics = new Graphics(resolution.width, resolution.height, '#263238')
 		this.timer = new Timer()
 
 
 		this.inputs = new Input('keydown')
 		this.player1 = new Player(20, 20)
 		this.player2 = new Player(640 - 20 - 20, 20)
+
+		const verticalCenter = (resolution.height / 2) - (this.player1.h / 2)
+
+		this.player1.y = verticalCenter
+		this.player2.y = verticalCenter
 
 		this.ball = new Ball()
 		this.setActions()
