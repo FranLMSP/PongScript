@@ -12,7 +12,7 @@ class Game {
 
 		this.inputs = new Input('keydown')
 		this.player1 = new Player(20, 20)
-		this.player2 = new Player(640 - 20 - 20, 20)
+		this.player2 = new Player(resolution.width - 20 - 20, 20)
 
 		const verticalCenter = (resolution.height / 2) - (this.player1.h / 2)
 
