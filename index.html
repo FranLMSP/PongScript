@@ -3,9 +3,75 @@
 <head>
 	<title>Pong</title>
 	<meta charset="utf-8">
+	<style>
+		.canvas-container {
+		   width: 100%;
+		   text-align:center;
+		}
+
+		.canvas-container > canvas {
+		   display: inline;
+		}
+
+		.buttons {
+			text-align: center;
+		}
+
+		.buttons > button {
+			width: 200px;
+			height: 200px;
+			background-color: #263238;
+			color: white;
+			border: solid;
+			border-radius: 10px;
+			border-color: #bdbdbd;
+			margin-top: 30px;
+			margin-right: 100px;
+			margin-left: 100px;
+			border-width: 5px;
+			font-family: sans-serif;
+			font-size: 40px;
+			font-weight: bold;
+		}
+	</style>
 </head>
 <body>
-	<canvas id="canv" width="640" height="480"></canvas>
+	<div class="canvas-container">
+		<canvas id="canv" width="640" height="480">Your browser doesn't support canvas ):</canvas>
+	</div>
+
+	<br>
+
+	<div class="buttons">
+
+
+		<button
+			id="playerOneUp"
+			style="transform: rotate(180deg);"
+		>
+			V
+		</button>
+		<button
+			id="playerTwoUp"
+			style="transform: rotate(180deg);"
+		>
+			V
+		</button>
+
+		<br>
+
+		<button
+			id="playerOneDown"
+		>
+			V
+		</button>
+		<button
+			id="playerTwoDown"
+		>
+			V
+		</button>
+	</div>
+
 </body>
 </html>
 
@@ -16,10 +82,11 @@
 <script type="text/javascript" src="Player.js"></script>
 <script type="text/javascript" src="Game.js"></script>
 <script type="text/javascript">
-	
+
 window.onload = function(){
 	// alert();
 	game = new Game();
+
 };
 
 </script>
