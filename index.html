@@ -12,12 +12,66 @@
 		.canvas-container > canvas {
 		   display: inline;
 		}
+
+		.buttons {
+			text-align: center;
+		}
+
+		.buttons > button {
+			width: 100px;
+			height: 100px;
+			background-color: #263238;
+			color: white;
+			border: solid;
+			border-radius: 10px;
+			border-color: #bdbdbd;
+			margin-top: 30px;
+			margin-right: 150px;
+			margin-left: 150px;
+			border-width: 5px;
+			font-family: sans-serif;
+			font-size: 40px;
+			font-weight: bold;
+		}
 	</style>
 </head>
 <body>
 	<div class="canvas-container">
 		<canvas id="canv" width="640" height="480">Your browser doesn't support canvas ):</canvas>
 	</div>
+
+	<br>
+
+	<div class="buttons">
+
+
+		<button
+			id="playerOneUp"
+			style="transform: rotate(180deg);"
+		>
+			V
+		</button>
+		<button
+			id="playerTwoUp"
+			style="transform: rotate(180deg);"
+		>
+			V
+		</button>
+
+		<br>
+
+		<button
+			id="playerOneDown"
+		>
+			V
+		</button>
+		<button
+			id="playerTwoDown"
+		>
+			V
+		</button>
+	</div>
+
 </body>
 </html>
 
@@ -32,6 +86,7 @@
 window.onload = function(){
 	// alert();
 	game = new Game();
+
 };
 
 </script>
