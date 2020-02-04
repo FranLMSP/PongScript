@@ -3,41 +3,13 @@ class Input {
 		document.addEventListener('keydown', this.pressedKey.bind(this))
 		document.addEventListener('keyup', this.releasedKey.bind(this))
 
-		document.getElementById('playerOneUp').addEventListener('mousedown', ((e) => {
-			e.preventDefault()
-			this.pressedKeys.player1Up = true
-		}).bind(this))
-		document.getElementById('playerOneUp').addEventListener('touchstart', ((e) => {
-			e.preventDefault()
-			this.pressedKeys.player1Up = true
-		}).bind(this))
+		this.touchStartEvents()
+		this.touchEndEvents()
 
-		document.getElementById('playerTwoUp').addEventListener('mousedown', ((e) => {
-			e.preventDefault()
-			this.pressedKeys.player2Up = true
-		}).bind(this))
-		document.getElementById('playerTwoUp').addEventListener('touchstart', ((e) => {
-			e.preventDefault()
-			this.pressedKeys.player2Up = true
-		}).bind(this))
+		this.pressedKeys = []
+	}
 
-		document.getElementById('playerOneDown').addEventListener('mousedown', ((e) => {
-			e.preventDefault()
-			this.pressedKeys.player1Down = true
-		}).bind(this))
-		document.getElementById('playerOneDown').addEventListener('touchstart', ((e) => {
-			e.preventDefault()
-			this.pressedKeys.player1Down = true
-		}).bind(this))
-		document.getElementById('playerTwoDown').addEventListener('mousedown', ((e) => {
-			e.preventDefault()
-			this.pressedKeys.player2Down = true
-		}).bind(this))
-		document.getElementById('playerTwoDown').addEventListener('touchstart', ((e) => {
-			e.preventDefault()
-			this.pressedKeys.player2Down = true
-		}).bind(this))
-
+	touchEndEvents() {
 		document.getElementById('playerOneUp').addEventListener('mouseup', ((e) => {
 			e.preventDefault()
 			this.pressedKeys.player1Up = false
@@ -72,9 +44,44 @@ class Input {
 			this.pressedKeys.player2Down = false
 		}).bind(this))
 
-		this.pressedKeys = []
 	}
 
+	touchStartEvents() {
+		document.getElementById('playerOneUp').addEventListener('mousedown', ((e) => {
+			e.preventDefault()
+			this.pressedKeys.player1Up = true
+		}).bind(this))
+		document.getElementById('playerOneUp').addEventListener('touchstart', ((e) => {
+			e.preventDefault()
+			this.pressedKeys.player1Up = true
+		}).bind(this))
+
+		document.getElementById('playerTwoUp').addEventListener('mousedown', ((e) => {
+			e.preventDefault()
+			this.pressedKeys.player2Up = true
+		}).bind(this))
+		document.getElementById('playerTwoUp').addEventListener('touchstart', ((e) => {
+			e.preventDefault()
+			this.pressedKeys.player2Up = true
+		}).bind(this))
+
+		document.getElementById('playerOneDown').addEventListener('mousedown', ((e) => {
+			e.preventDefault()
+			this.pressedKeys.player1Down = true
+		}).bind(this))
+		document.getElementById('playerOneDown').addEventListener('touchstart', ((e) => {
+			e.preventDefault()
+			this.pressedKeys.player1Down = true
+		}).bind(this))
+		document.getElementById('playerTwoDown').addEventListener('mousedown', ((e) => {
+			e.preventDefault()
+			this.pressedKeys.player2Down = true
+		}).bind(this))
+		document.getElementById('playerTwoDown').addEventListener('touchstart', ((e) => {
+			e.preventDefault()
+			this.pressedKeys.player2Down = true
+		}).bind(this))
+	}
 
 	pressedKey(event) {
 		switch(event.keyCode) {
