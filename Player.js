@@ -15,6 +15,13 @@ class Player {
 		this.direction = 'u'
 	}
 
+	reset(resolution) {
+		const verticalCenter = (resolution.height / 2) - (this.h / 2)
+		this.y = verticalCenter
+		this.points = 0
+		this.speed = 0
+	}
+
 	move() {
 		this.y += this.speed
 	}

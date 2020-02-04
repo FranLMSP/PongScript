@@ -1,12 +1,21 @@
 class Game {
 	constructor() {
-		this.graphics = new Graphics(640, 480, '#263238')
+
+		this.resolution = {
+			width: 640,
+			height: 480
+		}
+
+		this.graphics = new Graphics(this.resolution.width, this.resolution.height, '#263238')
 		this.timer = new Timer()
 
 
 		this.inputs = new Input('keydown')
 		this.player1 = new Player(20, 20)
-		this.player2 = new Player(640 - 20 - 20, 20)
+		this.player2 = new Player(this.resolution.width - 20 - 20, 20)
+
+		this.player1.reset(this.resolution)
+		this.player2.reset(this.resolution)
 
 		this.ball = new Ball()
 		this.setActions()
@@ -51,8 +60,6 @@ class Game {
 
 			if(this.player1.points > 9) {
 				alert('PLAYER 1 WINS!')
-				this.player1.points = 0
-				this.player2.points = 0
 			}
 		} else if(point == 2) {
 
@@ -62,9 +69,12 @@ class Game {
 
 			if(this.player2.points > 9) {
 				alert('PLAYER 2 WINS!')
-				this.player1.points = 0
-				this.player2.points = 0
 			}
+		}
+
+		if(this.player1.points > 9 || this.player2.points > 9) {
+			this.player1.reset(this.resolution)
+			this.player2.reset(this.resolution)
 		}
 
 		this.draw()
