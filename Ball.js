@@ -13,15 +13,20 @@ class Ball {
 	}
 
 	update(player) {
+		if(this.x - this.r > 40 && this.x + this.r < 600 ) {
+			this.move()
+			return this.border()
+		}
+
 		for(let angle = 0; angle <= 360; angle += 0.25) {
 
-			let x = (Math.cos(angle * Math.PI / 180) * this.r + this.x);
-		    let y = (Math.sin(angle * Math.PI / 180) * this.r + this.y);
+			let x = (Math.cos(angle * Math.PI / 180) * this.r + this.x)
+		    let y = (Math.sin(angle * Math.PI / 180) * this.r + this.y)
 
 			if( (x >= player.x && x <= (player.x + player.w) ) &&// horizontal collision
 				(y >= player.y && y <= (player.y + player.h) ) // vertical collision
 			 ) {
-				this.hspeed = this.hspeed >= 0 ? this.hspeed + this.aceleration : this.hspeed - this.aceleration;
+				this.hspeed = this.hspeed >= 0 ? this.hspeed + this.aceleration : this.hspeed - this.aceleration
 				if(this.hspeed > this.acelerationLimit) {
 					this.hspeed = this.acelerationLimit
 				} else if(this.hspeed < -this.acelerationLimit) {
@@ -100,6 +105,11 @@ class Ball {
 			}
 		}
 
+		this.move()
+		return this.border()
+	}
+
+	move() {
 		this.x += this.hspeed
 		this.y += this.vspeed
 
@@ -109,7 +119,6 @@ class Ball {
 		if((this.y + this.r) > 480)
 			this.y = 480 - this.r
 
-		return this.border()
 	}
 
 	fixCollisions(type = null, x, y, player) {
