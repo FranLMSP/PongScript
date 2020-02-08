@@ -13,15 +13,36 @@ class Ball {
 	}
 
 	update(player) {
-		if(this.x - this.r > 40 && this.x + this.r < 600 ) {
-			this.move()
+		if(this.x - this.r > 45 && this.x + this.r < 595 ) {
+			this.move(false)
 			return this.border()
 		}
 
-		this.collision(player)
+		this.quarterSteps(player)
 
-		this.move()
 		return this.border()
+	}
+
+	quarterSteps(player) {
+		let collision = false
+
+		for(let i = 0; i < 4; i++) {
+			if(!collision) {
+				collision = this.collision(player)
+			}
+			this.move(true)
+		}
+
+		if(collision) {
+			this.hspeed = this.hspeed >= 0 ? this.hspeed + this.aceleration : this.hspeed - this.aceleration
+
+			if(this.hspeed > this.acelerationLimit) {
+				this.hspeed = this.acelerationLimit
+			} else if(this.hspeed < -this.acelerationLimit) {
+				this.hspeed = -this.acelerationLimit
+			}
+		}
+
 	}
 
 	collision(player) {
@@ -33,12 +54,7 @@ class Ball {
 			if( (x >= player.x && x <= (player.x + player.w) ) &&// horizontal collision
 				(y >= player.y && y <= (player.y + player.h) ) // vertical collision
 			 ) {
-				this.hspeed = this.hspeed >= 0 ? this.hspeed + this.aceleration : this.hspeed - this.aceleration
-				if(this.hspeed > this.acelerationLimit) {
-					this.hspeed = this.acelerationLimit
-				} else if(this.hspeed < -this.acelerationLimit) {
-					this.hspeed = -this.acelerationLimit
-				}
+
 
 				let diagonalCol = false
 
@@ -114,9 +130,19 @@ class Ball {
 
 	}
 
-	move() {
-		this.x += this.hspeed
-		this.y += this.vspeed
+	move(quarterSteps = false) {
+		if(quarterSteps) {
+			const quarterVerticalSpeed = this.vspeed / 4
+			// this.y = this.vspeed > 0 ? this.y + this.vspeed : this.y - this.vspeed
+			const quarterHorizontalSpeed = this.hspeed / 4
+			// this.x = this.hspeed > 0 ? this.x + this.hspeed : this.x - this.hspeed
+
+			this.x += quarterHorizontalSpeed
+			this.y += quarterVerticalSpeed
+		} else {
+			this.x += this.hspeed
+			this.y += this.vspeed
+		}
 
 		if((this.y - this.r) < 0)
 			this.y = this.r
