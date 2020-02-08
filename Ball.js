@@ -18,6 +18,13 @@ class Ball {
 			return this.border()
 		}
 
+		this.collision(player)
+
+		this.move()
+		return this.border()
+	}
+
+	collision(player) {
 		for(let angle = 0; angle <= 360; angle += 0.25) {
 
 			let x = (Math.cos(angle * Math.PI / 180) * this.r + this.x)
@@ -105,8 +112,6 @@ class Ball {
 			}
 		}
 
-		this.move()
-		return this.border()
 	}
 
 	move() {
