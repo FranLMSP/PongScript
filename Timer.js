@@ -34,7 +34,8 @@ class Timer {
 			// console.log('Difference: '+difference+'. Delayed: '+(this.fps-difference)+'. TOTAL: '+(difference+(this.fps-difference)))
 			setTimeout(update, (this.fps - difference))
 		} else {
-			console.log('WARNING')
+			this.lag++
+			console.log('LAG FRAMES: ' + this.lag)
 			update()
 			// setTimeout(update,this.lag)
 		}

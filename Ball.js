@@ -20,8 +20,6 @@ class Ball {
 
 		this.quarterSteps(player)
 
-		console.log(this.aceleration)
-
 		return this.border()
 	}
 
