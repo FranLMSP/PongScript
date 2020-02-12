@@ -1,6 +1,6 @@
 class Ball {
 
-	constructor(r = 40, x = (640 / 2), y = (480 / 2), min_speed = 1, max_speed = 10, friction = 0.3, aceleration = 0.1, acelerationLimit = 2.5) {
+	constructor(r = 40, x = (640 / 2), y = (480 / 2), min_speed = 1, max_speed = 10, friction = 0.3, aceleration = 0.1, acelerationLimit = 3.3) {
 		this.r = r
 		this.x = x
 		this.y = y
@@ -13,20 +13,51 @@ class Ball {
 	}
 
 	update(player) {
+		if(this.x - this.r > (41 + this.acelerationLimit) && this.x + this.r < (599 - this.acelerationLimit) ) {
+			this.move(false)
+			return this.border()
+		}
+
+		this.quarterSteps(player)
+
+		return this.border()
+	}
+
+	quarterSteps(player) {
+		let collision = false
+
+		for(let i = 0; i < 4; i++) {
+			if(!collision) {
+				collision = this.collision(player)
+			}
+			this.move(true)
+		}
+
+		if(collision) {
+			this.hspeed = this.hspeed >= 0 ? this.hspeed + this.aceleration : this.hspeed - this.aceleration
+
+			if(player.speed != 0 )
+				this.vspeed = player.speed / 2
+
+			if(this.hspeed > this.acelerationLimit) {
+				this.hspeed = this.acelerationLimit
+			} else if(this.hspeed < -this.acelerationLimit) {
+				this.hspeed = -this.acelerationLimit
+			}
+		}
+
+	}
+
+	collision(player) {
 		for(let angle = 0; angle <= 360; angle += 0.25) {
 
-			let x = (Math.cos(angle * Math.PI / 180) * this.r + this.x);
-		    let y = (Math.sin(angle * Math.PI / 180) * this.r + this.y);
+			let x = (Math.cos(angle * Math.PI / 180) * this.r + this.x)
+		    let y = (Math.sin(angle * Math.PI / 180) * this.r + this.y)
 
 			if( (x >= player.x && x <= (player.x + player.w) ) &&// horizontal collision
 				(y >= player.y && y <= (player.y + player.h) ) // vertical collision
 			 ) {
-				this.hspeed = this.hspeed >= 0 ? this.hspeed + this.aceleration : this.hspeed - this.aceleration;
-				if(this.hspeed > this.acelerationLimit) {
-					this.hspeed = this.acelerationLimit
-				} else if(this.hspeed < -this.acelerationLimit) {
-					this.hspeed = -this.acelerationLimit
-				}
+
 
 				let diagonalCol = false
 
@@ -34,24 +65,28 @@ class Ball {
 				if((angle >= 0 && angle <= 22.5) || (angle >= 337.5 && angle <= 360)){
 					this.hspeed = this.hspeed >= 0 ? -this.hspeed : this.hspeed
 					this.fixCollisions('right', x, y, player)
+					return true
 				}
 
 				//LEFT COLLISION
 				if(angle >= 157.5 && angle <= 202.5) {
 					this.hspeed = this.hspeed < 0 ? -this.hspeed : this.hspeed
 					this.fixCollisions('left', x, y, player)
+					return true
 				}
 
 				//TOP COLLISION
 				if(angle >= 247.5 && angle <= 292.5) {
 					this.vspeed = this.vspeed < 0 ? -this.vspeed : this.vspeed
 					this.fixCollisions('top', x, y, player)
+					return true
 				}
 
 				//BOTTOM COLLISION
 				if(angle >= 67.5 && angle <= 112.5) {
 					this.vspeed = this.vspeed >= 0 ? -this.vspeed : this.vspeed
 					this.fixCollisions('bottom', x, y, player)
+					return true
 				}
 
 
@@ -64,6 +99,7 @@ class Ball {
 					diagonalCol = true
 					this.fixCollisions('left', x, y, player)
 					this.fixCollisions('top', x, y, player)
+					return true
 				}
 
 				//TOP RIGHT COLLISION
@@ -73,6 +109,7 @@ class Ball {
 					diagonalCol = true
 					this.fixCollisions('right', x, y, player)
 					this.fixCollisions('top', x, y, player)
+					return true
 				}
 
 				//BOTTOM RIGHT COLLISION
@@ -82,6 +119,7 @@ class Ball {
 					diagonalCol = true
 					this.fixCollisions('right', x, y, player)
 					this.fixCollisions('bottom', x, y, player)
+					return true
 				}
 
 				//BOTTOM LEFT COLLISION
@@ -91,17 +129,30 @@ class Ball {
 					diagonalCol = true
 					this.fixCollisions('left', x, y, player)
 					this.fixCollisions('bottom', x, y, player)
+					return true
 				}
 
-				if(player.speed != 0 )
-					this.vspeed = player.speed / 2
-
-				break
+				return false
 			}
 		}
 
-		this.x += this.hspeed
-		this.y += this.vspeed
+		return false
+
+	}
+
+	move(quarterSteps = false) {
+		if(quarterSteps) {
+			const quarterVerticalSpeed = this.vspeed / 4
+			// this.y = this.vspeed > 0 ? this.y + this.vspeed : this.y - this.vspeed
+			const quarterHorizontalSpeed = this.hspeed / 4
+			// this.x = this.hspeed > 0 ? this.x + this.hspeed : this.x - this.hspeed
+
+			this.x += quarterHorizontalSpeed
+			this.y += quarterVerticalSpeed
+		} else {
+			this.x += this.hspeed
+			this.y += this.vspeed
+		}
 
 		if((this.y - this.r) < 0)
 			this.y = this.r
@@ -109,7 +160,6 @@ class Ball {
 		if((this.y + this.r) > 480)
 			this.y = 480 - this.r
 
-		return this.border()
 	}
 
 	fixCollisions(type = null, x, y, player) {
