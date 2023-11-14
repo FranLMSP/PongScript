@@ -1,5 +1,4 @@
 class Ball {
-
 	constructor(r = 40, x = (640 / 2), y = (480 / 2), min_speed = 1, max_speed = 10, friction = 0.3, aceleration = 0.1, acelerationLimit = 3.3) {
 		this.r = r
 		this.x = x
@@ -10,6 +9,7 @@ class Ball {
 
 		this.aceleration = aceleration
 		this.acelerationLimit = acelerationLimit
+		this._gameMath = GameMath.getInstance()
 	}
 
 	update(player) {
@@ -51,16 +51,12 @@ class Ball {
 	collision(player) {
 		for(let angle = 0; angle <= 360; angle += 0.25) {
 
-			let x = (Math.cos(angle * Math.PI / 180) * this.r + this.x)
-		    let y = (Math.sin(angle * Math.PI / 180) * this.r + this.y)
+            let x = (this._gameMath.cos(angle) * this.r + this.x)
+            let y = (this._gameMath.sin(angle) * this.r + this.y)
 
 			if( (x >= player.x && x <= (player.x + player.w) ) &&// horizontal collision
 				(y >= player.y && y <= (player.y + player.h) ) // vertical collision
 			 ) {
-
-
-				let diagonalCol = false
-
 				//RIGTH COLLISION
 				if((angle >= 0 && angle <= 22.5) || (angle >= 337.5 && angle <= 360)){
 					this.hspeed = this.hspeed >= 0 ? -this.hspeed : this.hspeed
@@ -96,7 +92,6 @@ class Ball {
 				if(angle > 202.5 && angle < 247.5) {
 					this.vspeed = this.vspeed < 0 ? -this.vspeed : this.vspeed
 					this.hspeed = this.hspeed < 0 ? -this.hspeed : this.hspeed
-					diagonalCol = true
 					this.fixCollisions('left', x, y, player)
 					this.fixCollisions('top', x, y, player)
 					return true
@@ -106,7 +101,6 @@ class Ball {
 				if(angle > 292.5 && angle < 337.5) {
 					this.vspeed = this.vspeed < 0 ? -this.vspeed : this.vspeed
 					this.hspeed = this.hspeed >= 0 ? -this.hspeed : this.hspeed
-					diagonalCol = true
 					this.fixCollisions('right', x, y, player)
 					this.fixCollisions('top', x, y, player)
 					return true
@@ -116,7 +110,6 @@ class Ball {
 				if(angle > 22.5 && angle < 67.5) {
 					this.vspeed = this.vspeed >= 0 ? -this.vspeed : this.vspeed
 					this.hspeed = this.hspeed >= 0 ? -this.hspeed : this.hspeed
-					diagonalCol = true
 					this.fixCollisions('right', x, y, player)
 					this.fixCollisions('bottom', x, y, player)
 					return true
@@ -126,7 +119,6 @@ class Ball {
 				if(angle > 112.5 && angle < 157.5) {
 					this.vspeed = this.vspeed >= 0 ? -this.vspeed : this.vspeed
 					this.hspeed = this.hspeed < 0 ? -this.hspeed : this.hspeed
-					diagonalCol = true
 					this.fixCollisions('left', x, y, player)
 					this.fixCollisions('bottom', x, y, player)
 					return true
